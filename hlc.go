@@ -11,8 +11,14 @@ type HLC struct {
 	lastTS int64
 }
 
-func NewHLC() *HLC {
-	return &HLC{}
+func NewHLC(lastTS int64) *HLC {
+	if lastTS < 0 {
+		lastTS = 0
+	}
+
+	return &HLC{
+		lastTS: lastTS,
+	}
 }
 
 func (h *HLC) Next() int64 {
@@ -29,4 +35,8 @@ func (h *HLC) Next() int64 {
 	}
 
 	return atomic.AddInt64(&h.lastTS, 1)
+}
+
+func (h *HLC) SetLastTS(ts int64) {
+	h.lastTS = ts
 }

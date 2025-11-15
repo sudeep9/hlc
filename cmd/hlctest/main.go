@@ -8,7 +8,7 @@ import (
 )
 
 func gentest() {
-	h := hlc.NewHLC()
+	h := hlc.NewHLC(0)
 
 	wg := sync.WaitGroup{}
 	for range 5 {
